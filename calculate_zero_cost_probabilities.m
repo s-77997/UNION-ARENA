@@ -50,6 +50,55 @@ function probabilities = calculate_zero_cost_probabilities(totalCards, zeroCostC
 
     disp('Second draw probabilities (for each case in the first draw):');
     disp(second_prob);
+
+ % 各行（最初のドローで0〜7枚引いた場合）ごとにプロット
+    figure;
+    hold on; % 複数のプロットを1つの図に重ねる
+    
+    % X軸は2回目のドローで引く0コストカードの枚数
+    x = 0:secondDraw;
+    
+    % 最初に0〜7枚引いたそれぞれのケースごとの確率をプロット
+    for i = 0:firstDraw
+        plot(x, second_prob(i+1, :), 'DisplayName', sprintf('First draw: %d zero-cost', i));
+    end
+    
+    % グラフのラベルとタイトル
+    xlabel('Number of 0-cost cards drawn (Second Draw)');
+    ylabel('Probability');
+    title('Probability of drawing 0-cost cards (Second Draw)');
+    
+    % 凡例の表示
+    legend show;
+    
+    % X軸に整数値のラベルを設定
+    xticks(0:secondDraw);
+    
+    % グリッドを表示
+    % grid on;
+    
+    hold off; % 描画の終了
+
+% 最初に0枚の0コストカードを引いた場合
+    first_row_prob = second_prob(1, :);  % 1行目を取得（最初のドローで0枚引いたケース）
+    
+    % グラフのプロット
+    figure;
+    bar(x, first_row_prob, 'FaceColor', [0.4, 0.7, 0.3]);  % 棒グラフで表示
+    
+    % グラフのラベルとタイトル
+    xlabel('Number of 0-cost cards drawn (Second Draw)');
+    ylabel('Probability');
+    title('Probability of drawing 0-cost cards (Second Draw, First draw = 0 zero-cost cards)');
+    
+    % X軸に整数値のラベルを設定
+    xticks(0:7);
+    
+    % グリッドを表示
+    grid on;
+
+ % 2回目とも0枚の確立
+    fprintf('The probability of drawing 0 zero-cost cards in both draws is: %.6f\n', first_prob(1)*second_prob(1,1));
 end
 
 function prob = get_draw_probabilities(totalCards, zeroCostCards, drawCards)

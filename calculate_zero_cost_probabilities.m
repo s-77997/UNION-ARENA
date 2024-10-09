@@ -1,6 +1,8 @@
-function probabilities = calculate_zero_cost_probabilities(totalCards, zeroCostCards)
-    % totalCards: 合計のカード枚数（50枚）
-    % zeroCostCards: 0コストのカードの枚数
+% 初手に0コストが何枚あるかの確率
+
+function probabilities = calculate_zero_cost_probabilities()
+    totalCards = 50; % 合計のカード枚数（50枚）
+    zeroCostCards = 10; % 0コストのカードの枚数
     % probabilities: 各引きで0コストカードを引く枚数ごとの確率（最初の7枚および次の7枚）
 
     firstDraw = 7;   % 最初に引くカードの枚数
